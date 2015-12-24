@@ -1,0 +1,13 @@
+{
+  "entities":
+  [
+    {
+      "type": "Room",
+      "id": "Room1"
+    }
+  ],
+  "attributes":
+  [
+    "humidity"
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "attributes":
+    [
+      {
+        "name": "temperature",
+        "type": "centigrade",
+        "value": 23
+      }
+    ],
+    "id": "Room1",
+    "type": "Room"
+  },
+  {
+    "attributes":
+    [
+      {
+        "name": "temperature",
+        "type": "centigrade",
+        "value": 21
+      }
+    ],
+    "id": "Room2",
+    "type": "Room"
+  }
+]

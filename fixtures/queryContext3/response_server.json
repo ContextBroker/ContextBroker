@@ -1,0 +1,47 @@
+{
+  "contextResponses":
+  [
+    {
+      "contextElement":
+      {
+        "attributes":
+        [
+          {
+            "name": "temperature",
+            "type": "centigrade",
+            "value": "23"
+          }
+        ],
+        "id": "Room1",
+        "isPattern": "false",
+        "type": "Room"
+      },
+      "statusCode":
+      {
+        "code": "200",
+        "reasonPhrase": "OK"
+      }
+    },
+    {
+      "contextElement":
+      {
+        "attributes":
+        [
+          {
+            "name": "temperature",
+            "type": "centigrade",
+            "value": "21"
+          }
+        ],
+        "id": "Room2",
+        "isPattern": "false",
+        "type": "Room"
+      },
+      "statusCode":
+      {
+        "code": "200",
+        "reasonPhrase": "OK"
+      }
+    }
+  ]
+}

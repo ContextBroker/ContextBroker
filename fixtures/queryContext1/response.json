@@ -1,0 +1,19 @@
+[
+  {
+    "attributes":
+    [
+      {
+        "name": "temperature",
+        "type": "centigrade",
+        "value": 23
+      },
+      {
+        "name": "pressure",
+        "type": "mmHg",
+        "value": 720
+      }
+    ],
+    "id": "Room1",
+    "type": "Room"
+  }
+]
