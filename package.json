@@ -8,14 +8,14 @@
   },
   "author": "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>",
   "license": "ISC",
+  "dependencies": {
+    "inherits": "^2.0.1",
+    "moment": "^2.10.6"
+  },
   "devDependencies": {
     "karma": "^0.13.15",
     "nock": "^3.6.0",
     "qunit-cli": "piranna/qunit-cli",
     "qunitjs": "^1.20.0"
-  },
-  "dependencies": {
-    "inherits": "^2.0.1",
-    "moment": "^2.10.6"
   }
 }
