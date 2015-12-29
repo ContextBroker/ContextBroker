@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var spawn = require('child_process').spawn
+
+
+var contextBroker = process.env.CONTEXTBROKER_COV ? './lib-cov':'./lib'
+
+var argv =
+[
+  '-c', 'nock:node_modules/nock',
+  '-c', 'contextBroker:'+contextBroker,
+  '-c', 'node_modules/qunit-reporter-lcov',
+  '-c', 'test/_common.js',
+  'test'
+]
+
+spawn('qunit-cli', argv.concat(process.argv.slice(2)), {stdio: 'inherit'})
+.on('exit', function(code)
+{
+  if(code) process.exit(code)
+})

@@ -4,11 +4,13 @@ if (typeof QUnit === 'undefined')
 {
   QUnit = require('qunit-cli')
   QUnit.load()
+
+  nock = require('nock')
+
+  contextBroker = require('..')
 }
 
-var nock = require('nock')
-
-var QueryContext = require('../lib/QueryContext')
+var QueryContext = contextBroker.QueryContext
 
 
 const SERVER = 'example.com'
