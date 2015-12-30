@@ -35,7 +35,7 @@ QUnit.test('Get context', function(assert)
 
   var done = assert.async()
 
-  var fixtures = require('../fixtures/queryContext1')
+  var fixtures = require('./fixtures/queryContext1')
 
   var response = fixtures.response_server
   server.post('/NGSI10/queryContext').reply(200, response)
@@ -64,7 +64,7 @@ QUnit.test('Get attribute', function(assert)
 
   var done = assert.async()
 
-  var fixtures = require('../fixtures/queryContext2')
+  var fixtures = require('./fixtures/queryContext2')
 
   var response = fixtures.response_server
   server.post('/NGSI10/queryContext').reply(200, response)
@@ -94,7 +94,7 @@ QUnit.test('Get attribute from several contexts', function(assert)
 
   var done = assert.async()
 
-  var fixtures = require('../fixtures/queryContext3')
+  var fixtures = require('./fixtures/queryContext3')
 
   var response = fixtures.response_server
   server.post('/NGSI10/queryContext').reply(200, response)
@@ -130,7 +130,7 @@ QUnit.test('Get attribute from several contexts using pattern', function(assert)
 
   var done = assert.async()
 
-  var fixtures = require('../fixtures/queryContext3')
+  var fixtures = require('./fixtures/queryContext3')
 
   var response = fixtures.response_server
   server.post('/NGSI10/queryContext').reply(200, response)
@@ -166,7 +166,7 @@ QUnit.test('Get attribute from several contexts using RegExp', function(assert)
 
   var done = assert.async()
 
-  var fixtures = require('../fixtures/queryContext3')
+  var fixtures = require('./fixtures/queryContext3')
 
   var response = fixtures.response_server
   server.post('/NGSI10/queryContext').reply(200, response)
@@ -207,7 +207,7 @@ QUnit.test('Non existing entity', function(assert)
 
   var done = assert.async()
 
-  var fixtures = require('../fixtures/queryContext4')
+  var fixtures = require('./fixtures/queryContext4')
 
   var response = fixtures.response_server
   server.post('/NGSI10/queryContext').reply(200, response)
@@ -233,7 +233,7 @@ QUnit.test('Non existing attribute', function(assert)
 
   var done = assert.async()
 
-  var fixtures = require('../fixtures/queryContext4')
+  var fixtures = require('./fixtures/queryContext4')
 
   var response = fixtures.response_server
   server.post('/NGSI10/queryContext').reply(200, response)
