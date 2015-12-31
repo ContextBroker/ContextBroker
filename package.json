@@ -2,20 +2,24 @@
   "name": "context-broker",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib",
   "scripts": {
-    "test": "qunit-cli test"
+    "test": "scripts/test",
+    "coveralls": "jscoverage lib && scripts/coveralls"
   },
   "author": "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>",
   "license": "ISC",
-  "devDependencies": {
-    "karma": "^0.13.15",
-    "nock": "^3.6.0",
-    "qunit-cli": "piranna/qunit-cli",
-    "qunitjs": "^1.20.0"
-  },
   "dependencies": {
     "inherits": "^2.0.1",
     "moment": "^2.10.6"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.6",
+    "fs-extra": "^0.26.3",
+    "jscoverage": "piranna/jscoverage",
+    "nock": "^3.6.0",
+    "qunit-cli": "piranna/qunit-cli",
+    "qunit-reporter-lcov": "^1.0.2",
+    "qunitjs": "^1.20.0"
   }
 }
