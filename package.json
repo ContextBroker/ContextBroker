@@ -10,6 +10,8 @@
   "author": "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "clone": "^1.0.2",
+    "deep-freeze": "0.0.1",
     "inherits": "^2.0.1",
     "moment": "^2.10.6"
   },
