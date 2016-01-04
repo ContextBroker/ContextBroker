@@ -1,0 +1,15 @@
+{
+  "entities":
+  [
+    {
+      "type": "Room",
+      "isPattern": false,
+      "id": "Room1"
+    }
+  ],
+  "attributes": ["temperature"],
+  "reference": "http://example.net:80/accumulate",
+  "duration": "P1M",
+  "condValues": ["pressure"],
+  "throttling": "PT5S"
+}
