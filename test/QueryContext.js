@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-if (typeof QUnit === 'undefined')
+if(typeof QUnit === 'undefined')
 {
   QUnit = require('qunit-cli')
   QUnit.load()
@@ -9,6 +9,7 @@ if (typeof QUnit === 'undefined')
 
   contextBroker = require('..')
 }
+nock.disableNetConnect()
 
 var QueryContext = contextBroker.QueryContext
 
@@ -16,8 +17,6 @@ var QueryContext = contextBroker.QueryContext
 const SERVER = 'example.com'
 const FIWARE_SERVICE = 'MyService'
 
-
-nock.disableNetConnect()
 
 var server = nock('http://'+SERVER)
 

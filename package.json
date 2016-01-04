@@ -7,19 +7,23 @@
     "test": "scripts/test",
     "coveralls": "jscoverage lib && scripts/coveralls"
   },
-  "author": "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>",
+  "author": "Telefónica I+D",
+  "contributors": [
+    "Jesús Leganés Combarro 'piranna' <piranna@gmail.com>"
+  ],
   "license": "ISC",
   "dependencies": {
     "clone": "^1.0.2",
+    "concat-stream": "^1.5.1",
     "deep-freeze": "0.0.1",
     "inherits": "^2.0.1",
-    "moment": "^2.10.6"
+    "moment": "^2.11.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.6",
     "fs-extra": "^0.26.3",
     "jscoverage": "piranna/jscoverage",
-    "nock": "^3.6.0",
+    "nock": "^4.0.0",
     "qunit-cli": "piranna/qunit-cli",
     "qunit-reporter-lcov": "^1.0.2",
     "qunitjs": "^1.20.0"
