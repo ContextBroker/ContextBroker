@@ -85,8 +85,10 @@ QUnit.test('Subscribe & receive data', function(assert)
   request.fiwareService = FIWARE_SERVICE
   request.reference = 'http://localhost:'+this.proxyPort+'/accumulate'
 
-  this.subscribeContext = SubscribeContext(request)
-  .once('data', function(data)
+  var subscribeContext = SubscribeContext(request)
+  this.subscribeContext = subscribeContext
+
+  subscribeContext.once('data', function(data)
   {
     var expected = fixtures.notification[0]
 
