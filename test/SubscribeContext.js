@@ -5,7 +5,8 @@ if(typeof QUnit === 'undefined')
   QUnit = require('qunit-cli')
   QUnit.load()
 
-  nock = require('nock')
+  nock     = require('nock')
+  post2sse = require('post2sse')
 
   contextBroker = require('..')
 }
@@ -23,7 +24,6 @@ var server = nock('http://'+SERVER)
 
 
 var http = require('http')
-var post2sse = require('post2sse')
 QUnit.module('SubscribeContext',
 {
   beforeEach: function(assert)

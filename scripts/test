@@ -8,6 +8,7 @@ var contextBroker = process.env.CONTEXTBROKER_COV ? './lib-cov':'./lib'
 var argv =
 [
   '-c', 'nock:node_modules/nock',
+  '-c', 'post2sse:node_modules/post2sse',
   '-c', 'contextBroker:'+contextBroker,
   '-c', 'node_modules/qunit-reporter-lcov',
   '-c', 'test/_common.js',
