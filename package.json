@@ -15,12 +15,12 @@
   "dependencies": {
     "clone": "^1.0.2",
     "deep-freeze": "0.0.1",
-    "disguise": "0.0.0",
+    "disguise": "0.0.1",
     "eventsource": "^0.1.6",
     "inherits": "^2.0.1",
     "moment": "^2.11.1",
     "request-promise": "^2.0.0",
-    "thenable-utils": "0.0.0"
+    "thenable-utils": "0.0.1"
   },
   "devDependencies": {
     "coveralls": "^2.11.6",

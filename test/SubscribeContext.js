@@ -132,12 +132,12 @@ QUnit.test('Update & close', function(assert)
     return this.update({throttling: 'PT10S'})
     .then(function()
     {
-      assert.strictEqual(subscribeContext.throttling, 'PT10S')
+      assert.strictEqual(this.throttling, 'PT10S')
 
-      return subscribeContext.close()
+      return this.close()
       .then(function()
       {
-        assert.strictEqual(subscribeContext.subscriptionId, null)
+        assert.strictEqual(this.subscriptionId, null)
 
         done()
       })
