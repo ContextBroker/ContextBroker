@@ -85,10 +85,8 @@ QUnit.test('Subscribe & receive data', function(assert)
   request.fiwareService = FIWARE_SERVICE
   request.reference = 'http://localhost:'+this.proxyPort+'/accumulate'
 
-  var subscribeContext = SubscribeContext(request)
-  this.subscribeContext = subscribeContext
-
-  subscribeContext.once('data', function(data)
+  this.subscribeContext = SubscribeContext(request)
+  .once('data', function(data)
   {
     var expected = fixtures.notification[0]
 
@@ -118,34 +116,24 @@ QUnit.test('Update & close', function(assert)
   .post('/NGSI10/unsubscribeContext')       .reply(200, fixtures.unsubscribe_response)
 
 
+  const throttling = 'PT10S'
+
   // Connect to servers
   var request = fixtures.request
   request.hostname = SERVER
   request.fiwareService = FIWARE_SERVICE
   request.reference = 'http://localhost:'+this.proxyPort+'/accumulate'
 
-  var subscribeContext = SubscribeContext(request)
-  this.subscribeContext = subscribeContext
-
-  subscribeContext.then(function()
+  this.subscribeContext = SubscribeContext(request)
+  .update({throttling: throttling})
+  .then(function()
   {
-    return this.update({throttling: 'PT10S'})
-    .then(function()
-    {
-      assert.strictEqual(this.throttling, 'PT10S')
-
-      return this.close()
-      .then(function()
-      {
-        assert.strictEqual(this.subscriptionId, null)
-
-        done()
-      })
-    })
+    assert.strictEqual(this.throttling, throttling)
   })
-  .catch(function(error)
+  .close()
+  .then(function()
   {
-    console.error(error)
-    done()
+    assert.strictEqual(this.subscriptionId, null)
   })
+  .then(done, done)
 })
