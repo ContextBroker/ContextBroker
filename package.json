@@ -26,7 +26,7 @@
     "coveralls": "^2.11.6",
     "fs-extra": "^0.26.4",
     "jscoverage": "piranna/jscoverage",
-    "nock": "^5.2.1",
+    "nock": "^6.0.1",
     "post2sse": "^0.0.0",
     "qunit-cli": "piranna/qunit-cli",
     "qunit-reporter-lcov": "^1.0.2",
