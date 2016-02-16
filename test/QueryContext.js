@@ -37,6 +37,7 @@ it('Get context', function(done)
 
     assert.deepEqual(data, expected)
 
+    this.close()
     done()
   })
   .on('error', done)

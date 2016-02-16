@@ -87,13 +87,10 @@ it('Subscribe & receive data', function(done)
 
     assert.deepEqual(data, expected)
 
+    this.close()
     done()
   })
-  .on('error', function(error)
-  {
-    console.trace(error)
-    done()
-  })
+  .on('error', done)
 })
 
 it('Subscribe & receive data without notifications server', function(done)
@@ -132,13 +129,10 @@ it('Subscribe & receive data without notifications server', function(done)
 
     assert.deepEqual(data, expected)
 
+    this.close()
     done()
   })
-  .on('error', function(error)
-  {
-    console.trace(error)
-    done()
-  })
+  .on('error', done)
 })
 
 it('Update & close', function(done)
@@ -165,6 +159,10 @@ it('Update & close', function(done)
   request.webhook = 'http://localhost:'+proxyPort+'/accumulate'
 
   subscribeContext = SubscribeContext(request)
+  .on('error', function(error)
+  {
+    console.trace(error)
+  })
   .update({throttling: throttling})
   .then(function()
   {
@@ -178,7 +176,6 @@ it('Update & close', function(done)
   .close()
   .then(function()
   {
-    console.log('this.subscriptionId:',this.subscriptionId)
     assert.strictEqual(this.subscriptionId, null)
   })
   .then(done, done)

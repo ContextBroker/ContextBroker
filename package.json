@@ -5,7 +5,7 @@
   "main": "lib",
   "scripts": {
     "test": "scripts/test",
-    "coveralls": "jscoverage lib && scripts/coveralls"
+    "coveralls": "scripts/coveralls"
   },
   "author": "Telefónica I+D",
   "contributors": [
@@ -14,14 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "clone": "^1.0.2",
-    "concat-stream": "^1.5.1",
     "deep-freeze": "^0.0.1",
     "disguise": "^0.2.1",
-    "eventsource": "^0.1.6",
     "inherits": "^2.0.1",
-    "moment": "^2.11.1",
+    "moment": "^2.11.2",
     "request-promise": "^2.0.0",
-    "thenable-utils": "^0.1.0"
+    "thenable-utils": "^0.1.0",
+    "webhook-post": "^0.0.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.6",
