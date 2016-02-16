@@ -25,12 +25,12 @@
   },
   "devDependencies": {
     "coveralls": "^2.11.6",
-    "fs-extra": "^0.26.4",
+    "fs-extra": "^0.26.5",
     "jscoverage": "piranna/jscoverage",
-    "nock": "^6.0.1",
-    "post2sse": "^0.0.0",
-    "qunit-cli": "piranna/qunit-cli",
-    "qunit-reporter-lcov": "^1.0.2",
-    "qunitjs": "^1.20.0"
+    "jsdoc": "^3.4.0",
+    "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.0.0",
+    "nock": "^7.2.1",
+    "post2sse": "^0.0.0"
   }
 }

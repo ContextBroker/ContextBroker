@@ -1,19 +1,14 @@
-#!/usr/bin/env node
+var assert = require('assert')
+var http   = require('http')
+var parse  = require('url').parse
 
-if(typeof QUnit === 'undefined')
-{
-  QUnit = require('qunit-cli')
-  QUnit.load()
+var nock     = require('nock')
+var post2sse = require('post2sse')
 
-  nock     = require('nock')
-  post2sse = require('post2sse')
+var SubscribeContext = require('..').SubscribeContext
 
-  contextBroker = require('..')
-}
 nock.disableNetConnect()
 nock.enableNetConnect('localhost')
-
-var SubscribeContext = contextBroker.SubscribeContext
 
 
 const SERVER = 'example.com'
@@ -23,95 +18,44 @@ const FIWARE_SERVICE = 'MyService'
 var server = nock('http://'+SERVER)
 
 
-var http  = require('http')
-var parse = require('url').parse
+var proxy
+var proxyPort
+var subscribeContext
 
-QUnit.module('SubscribeContext',
+beforeEach(function(done)
 {
-  beforeEach: function(assert)
+  // Clean modules cache (for fixtures)
+  // http://stackoverflow.com/questions/23685930/clearing-require-cache#comment53920334_23686122
+  Object.keys(require.cache).forEach(function(key)
   {
-    // Clean modules cache (for fixtures)
-    // http://stackoverflow.com/questions/23685930/clearing-require-cache#comment53920334_23686122
-    Object.keys(require.cache).forEach(function(key)
-    {
-      delete require.cache[key]
-    })
-
-    var self = this
-    var done = assert.async()
-
-    this.proxy = http.createServer(post2sse()).listen(0, function()
-    {
-      self.proxyPort = this.address().port
-      done()
-    })
-  },
-
-  afterEach: function()
-  {
-    if(!nock.isDone())
-      console.error('pending mocks: %j', nock.pendingMocks())
-
-    nock.cleanAll()
-
-    this.subscribeContext.close()
-
-    this.proxy.close()
-  }
-})
-
-
-QUnit.test('Subscribe & receive data', function(assert)
-{
-  assert.expect(1)
-
-  var self = this
-  var done = assert.async()
-
-  var fixtures = require('./fixtures/subscribeContext1')
-
-  server.post('/NGSI10/subscribeContext').reply(200, function(uri, requestBody)
-  {
-    var requestOptions = parse(requestBody.reference)
-        requestOptions.method = 'POST'
-
-    var requestData = JSON.stringify(fixtures.notification_server)
-
-    http.request(requestOptions).end(requestData)
-
-    return fixtures.response
+    delete require.cache[key]
   })
-  .post('/NGSI10/unsubscribeContext').reply(200, fixtures.unsubscribe_response)
 
-
-  // Connect to servers
-  var request = fixtures.request
-  request.hostname = SERVER
-  request.fiwareService = FIWARE_SERVICE
-  request.reference = 'http://localhost:'+this.proxyPort+'/accumulate'
-
-  this.subscribeContext = SubscribeContext(request)
-  .once('data', function(data)
+  proxy = http.createServer(post2sse()).listen(0, function()
   {
-    var expected = fixtures.notification[0]
-
-    assert.deepEqual(data, expected)
-
-    done()
-  })
-  .on('error', function(error)
-  {
-    console.trace(error)
+    proxyPort = this.address().port
     done()
   })
 })
 
-QUnit.test('Subscribe & receive data without notifications server', function(assert)
+afterEach(function()
 {
-  assert.expect(1)
+  if(!nock.isDone())
+    console.error('pending mocks: %j', nock.pendingMocks())
+
+  nock.cleanAll()
+
+  subscribeContext.close()
+
+  proxy.close()
+})
+
+
+it('Subscribe & receive data', function(done)
+{
+//  assert.expect(1)
 
   var self = this
-  var done = assert.async()
 
   var fixtures = require('./fixtures/subscribeContext1')
 
@@ -134,7 +78,9 @@ QUnit.test('Subscribe & receive data without notifications server', function(ass
   request.hostname = SERVER
   request.fiwareService = FIWARE_SERVICE
 
-  this.subscribeContext = SubscribeContext(request)
+  request.webhook = 'http://localhost:'+proxyPort+'/accumulate'
+
+  subscribeContext = SubscribeContext(request)
   .once('data', function(data)
   {
     var expected = fixtures.notification[0]
@@ -150,12 +96,56 @@ QUnit.test('Subscribe & receive data without notifications server', function(ass
   })
 })
 
-QUnit.test('Update & close', function(assert)
+it('Subscribe & receive data without notifications server', function(done)
 {
-  assert.expect(2)
+//  assert.expect(1)
 
   var self = this
-  var done = assert.async()
+
+  var fixtures = require('./fixtures/subscribeContext1')
+
+  server.post('/NGSI10/subscribeContext').reply(200, function(uri, requestBody)
+  {
+    var requestOptions = parse(requestBody.reference)
+        requestOptions.method = 'POST'
+
+    var requestData = JSON.stringify(fixtures.notification_server)
+
+    http.request(requestOptions).end(requestData)
+
+    return fixtures.response
+  })
+  .post('/NGSI10/unsubscribeContext').reply(200, fixtures.unsubscribe_response)
+
+
+  // Connect to servers
+  var request = fixtures.request
+  request.hostname = SERVER
+  request.fiwareService = FIWARE_SERVICE
+
+  request.webhook = {hostname: 'localhost'}
+
+  subscribeContext = SubscribeContext(request)
+  .once('data', function(data)
+  {
+    var expected = fixtures.notification[0]
+
+    assert.deepEqual(data, expected)
+
+    done()
+  })
+  .on('error', function(error)
+  {
+    console.trace(error)
+    done()
+  })
+})
+
+it('Update & close', function(done)
+{
+//  assert.expect(2)
+
+  var self = this
 
   var fixtures = require('./fixtures/subscribeContext2')
 
@@ -171,17 +161,24 @@ QUnit.test('Update & close', function(assert)
   var request = fixtures.request
   request.hostname = SERVER
   request.fiwareService = FIWARE_SERVICE
-  request.reference = 'http://localhost:'+this.proxyPort+'/accumulate'
 
-  this.subscribeContext = SubscribeContext(request)
+  request.webhook = 'http://localhost:'+proxyPort+'/accumulate'
+
+  subscribeContext = SubscribeContext(request)
   .update({throttling: throttling})
   .then(function()
   {
+    console.log('this.throttling:',this.throttling)
     assert.strictEqual(this.throttling, throttling)
+  },
+  function(error)
+  {
+    console.error('error:',error)
   })
   .close()
   .then(function()
   {
+    console.log('this.subscriptionId:',this.subscriptionId)
     assert.strictEqual(this.subscriptionId, null)
   })
   .then(done, done)

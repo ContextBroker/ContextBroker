@@ -1,17 +1,10 @@
-#!/usr/bin/env node
+var assert = require('assert')
 
-if(typeof QUnit === 'undefined')
-{
-  QUnit = require('qunit-cli')
-  QUnit.load()
+var nock = require('nock')
 
-  nock = require('nock')
+var QueryContext = require('..').QueryContext
 
-  contextBroker = require('..')
-}
 nock.disableNetConnect()
-
-var QueryContext = contextBroker.QueryContext
 
 
 const SERVER = 'example.com'
@@ -21,20 +14,11 @@ const FIWARE_SERVICE = 'MyService'
 var server = nock('http://'+SERVER)
 
 
-QUnit.module('QueryContext',
+afterEach(nock.cleanAll)
+
+it('Get context', function(done)
 {
-  afterEach: function()
-  {
-    nock.cleanAll()
-  }
-})
-
-
-QUnit.test('Get context', function(assert)
-{
-  assert.expect(1)
-
-  var done = assert.async()
+//  assert.expect(1)
 
   var fixtures = require('./fixtures/queryContext1')
 
@@ -53,17 +37,14 @@ QUnit.test('Get context', function(assert)
 
     assert.deepEqual(data, expected)
 
-    this.close()
     done()
   })
   .on('error', done)
 })
 
-QUnit.test('Get attribute', function(assert)
+it('Get attribute', function(done)
 {
-  assert.expect(1)
-
-  var done = assert.async()
+//  assert.expect(1)
 
   var fixtures = require('./fixtures/queryContext2')
 
@@ -89,11 +70,9 @@ QUnit.test('Get attribute', function(assert)
 })
 
 // [ToDo] test with real patter (they can't be included in the JSON)
-QUnit.test('Get attribute from several contexts', function(assert)
+it('Get attribute from several contexts', function(done)
 {
-  assert.expect(2)
-
-  var done = assert.async()
+//  assert.expect(2)
 
   var fixtures = require('./fixtures/queryContext3')
 
@@ -125,11 +104,9 @@ QUnit.test('Get attribute from several contexts', function(assert)
   .on('error', done)
 })
 
-QUnit.test('Get attribute from several contexts using pattern', function(assert)
+it('Get attribute from several contexts using pattern', function(done)
 {
-  assert.expect(2)
-
-  var done = assert.async()
+//  assert.expect(2)
 
   var fixtures = require('./fixtures/queryContext3')
 
@@ -161,11 +138,9 @@ QUnit.test('Get attribute from several contexts using pattern', function(assert)
   .on('error', done)
 })
 
-QUnit.test('Get attribute from several contexts using RegExp', function(assert)
+it('Get attribute from several contexts using RegExp', function(done)
 {
-  assert.expect(2)
-
-  var done = assert.async()
+//  assert.expect(2)
 
   var fixtures = require('./fixtures/queryContext3')
 
@@ -202,11 +177,9 @@ QUnit.test('Get attribute from several contexts using RegExp', function(assert)
   .on('error', done)
 })
 
-QUnit.test('Non existing entity', function(assert)
+it('Non existing entity', function(done)
 {
-  assert.expect(1)
-
-  var done = assert.async()
+//  assert.expect(1)
 
   var fixtures = require('./fixtures/queryContext4')
 
@@ -228,11 +201,9 @@ QUnit.test('Non existing entity', function(assert)
   .resume()
 })
 
-QUnit.test('Non existing attribute', function(assert)
+it('Non existing attribute', function(done)
 {
-  assert.expect(1)
-
-  var done = assert.async()
+//  assert.expect(1)
 
   var fixtures = require('./fixtures/queryContext4')
 
