@@ -10,8 +10,11 @@
       "id": "Room2"
     }
   ],
-  "attributes":
-  [
-    "temperature"
-  ]
+  "options":
+  {
+    "attributes":
+    [
+      "temperature"
+    ]
+  }
 }

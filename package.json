@@ -4,8 +4,9 @@
   "description": "",
   "main": "lib",
   "scripts": {
-    "test": "scripts/test",
-    "coveralls": "scripts/coveralls"
+    "coveralls": "scripts/coveralls",
+    "doc": "jsdoc . -d doc",
+    "test": "mocha"
   },
   "author": "Telefónica I+D",
   "contributors": [

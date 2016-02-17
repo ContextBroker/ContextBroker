@@ -7,8 +7,14 @@
       "id": "Room1"
     }
   ],
-  "attributes": ["temperature"],
-  "duration": "P1M",
-  "condValues": ["pressure"],
-  "throttling": "PT5S"
+  "options":
+  {
+    "attributes": ["temperature"],
+    "subscription":
+    {
+      "duration": "P1M",
+      "condValues": ["pressure"],
+      "throttling": "PT5S"
+    }
+  }
 }
