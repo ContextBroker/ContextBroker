@@ -17,6 +17,7 @@
     "clone": "^1.0.2",
     "deep-freeze": "^0.0.1",
     "disguise": "^0.2.1",
+    "force-objects-array": "0.0.0",
     "inherits": "^2.0.1",
     "moment": "^2.11.2",
     "request-promise": "^2.0.0",
