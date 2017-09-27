@@ -6,7 +6,9 @@
   "scripts": {
     "coveralls": "scripts/coveralls",
     "doc": "jsdoc . -d doc",
-    "test": "mocha"
+    "test": "mocha",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Telefónica I+D",
   "contributors": [
@@ -22,7 +24,8 @@
     "moment": "^2.11.2",
     "request-promise": "^2.0.0",
     "thenable-utils": "^0.1.0",
-    "webhook-post": "^0.0.0"
+    "webhook-post": "^0.0.0",
+    "snyk": "^1.41.1"
   },
   "devDependencies": {
     "coveralls": "^2.11.6",
@@ -33,5 +36,6 @@
     "mocha-lcov-reporter": "^1.0.0",
     "nock": "^7.2.1",
     "post2sse": "^0.0.0"
-  }
+  },
+  "snyk": true
 }
